@@ -1,0 +1,14 @@
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe.config
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe.manifest
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.application
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.pdb
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.csprojResolveAssemblyReference.cache
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\WindowsFormsApplication6.Form1.resources
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\WindowsFormsApplication6.Properties.Resources.resources
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.csproj.GenerateResource.Cache
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.TrustInfo.xml
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.exe.manifest
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.application
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.exe
+c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.pdb
