@@ -37,15 +37,19 @@
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
+            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // metroProgressBar1
             // 
+            this.metroProgressBar1.HideProgressText = false;
             this.metroProgressBar1.Location = new System.Drawing.Point(23, 215);
             this.metroProgressBar1.Name = "metroProgressBar1";
             this.metroProgressBar1.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Blocks;
             this.metroProgressBar1.Size = new System.Drawing.Size(446, 23);
             this.metroProgressBar1.TabIndex = 0;
+            this.metroProgressBar1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroProgressBar1.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // metroLabel1
@@ -121,7 +125,29 @@
             this.metroButton3.TabIndex = 7;
             this.metroButton3.Text = "Update Button";
             this.metroButton3.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroButton3.Click += new System.EventHandler(this.metroButton3_Click);
+            this.metroButton3.Click += new System.EventHandler(this.metroButton3_ClickAsync);
+            // 
+            // metroToggle1
+            // 
+            this.metroToggle1.DisplayStatus = false;
+            this.metroToggle1.Location = new System.Drawing.Point(399, 79);
+            this.metroToggle1.Name = "metroToggle1";
+            this.metroToggle1.Size = new System.Drawing.Size(70, 32);
+            this.metroToggle1.TabIndex = 8;
+            this.metroToggle1.Text = "Off";
+            this.metroToggle1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroToggle1.UseVisualStyleBackColor = true;
+            this.metroToggle1.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(391, 57);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(84, 19);
+            this.metroLabel5.TabIndex = 9;
+            this.metroLabel5.Text = "Auto Update";
+            this.metroLabel5.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // Form1
             // 
@@ -129,6 +155,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 261);
             this.ControlBox = false;
+            this.Controls.Add(this.metroLabel5);
+            this.Controls.Add(this.metroToggle1);
             this.Controls.Add(this.metroButton3);
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
@@ -159,6 +187,8 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton metroButton3;
+        private MetroFramework.Controls.MetroToggle metroToggle1;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
     }
 }
 

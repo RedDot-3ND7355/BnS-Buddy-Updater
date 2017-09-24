@@ -12,3 +12,18 @@ c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\
 c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.application
 c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.exe
 c:\users\endless\documents\visual studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.pdb
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe.config
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe.manifest
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.application
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.exe
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\bin\Release\BnS Buddy Updater.pdb
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\WindowsFormsApplication6.Form1.resources
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\WindowsFormsApplication6.Properties.Resources.resources
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.csproj.GenerateResource.Cache
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.TrustInfo.xml
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.exe.manifest
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.application
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.exe
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.pdb
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.csprojResolveAssemblyReference.cache
+E:\Users\Endless\Documents\Visual Studio 2015\Projects\WindowsFormsApplication6\WindowsFormsApplication6\obj\Release\BnS Buddy Updater.csproj.CoreCompileInputs.cache

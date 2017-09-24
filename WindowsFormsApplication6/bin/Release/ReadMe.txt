@@ -15,17 +15,164 @@ Disclaimer:
 Credits:
 + Miyako - Inspired by his/her BnS-Ark Tool!
 + Endless aka Kogaru - Recoded from scratch and improved!
-+ ronny1982 - For bnsdat tool <3
-+ LokiReborn - For porting bnsdat to C# <3
++ ronny1982 - For bnsdat tool
++ LokiReborn - For porting bnsdat to C# and adding AuthToken
 
 
 Requirements:
-+ .Net Framework 4.0 (not client profile)
++ .Net Framework 4.5 (not client profile)
 + MetroFramework.dll (included in download)
 ++ A brain :P
 
 
 Change Log:
+Updater 2.0
++ Added: Toggle for auto update
++ Reworked: fetching online build ver.
++ Reworked: fetching latest build & analyst
+
+Version 5.8.8.6
++ Added: Signature check
++ Added: Server validation to fetch online build number
++ Added: Estimated GCD time response
++ Added: Estimated InGame time response
++ Added: Korean Test Server Registry Path
++ Reworked: Completely reworked Fix Loading Screen & Backup check for it
++ Fixed Bug: Trying to login when maintenance was occuring lead to error
++ Fixed Bug: Korean Test server appid was replaced with proper one
++ Fixed Bug: Login form would error out if Registry could not be read
++ Fixed Bug: Color wether ping was good or not was not changing
++ Fixed Bug: Password would take more than 16 characters wich prevents users to login if password was originally longer than 16 chars
++ Fixed Bug: Tab selector would go out of bounds for too many items
++ Fixed Bug: Pinging wrong adress for na
++ Fixed Bug: Signature of BnS Buddy re-added due to a dependency build issue
+
+Version 5.8.8.5
++ Added: Maintenance Check(handler)
++ Added: Korean Test server option
++ Added: Interval(repeat) for autoclean
++ Rework: Fix Loading Screen now properly removes even if one of them is missing, same for restoring
++ Fixed Bug: Mod Manager tab buttons not working after game killed/closed
++ Fixed Bug: Boost Process would not auto start
++ Fixed Bug: Memory Cleaner would not auto clean
+
+Version 5.8.8.0
++ Removed: Forgot a popup while updating settings.ini
++ Fixed Bug: Setting Custom Mod Folder Would be blank in settings.ini 
+
+Version 5.8.7.9
++ Added: Priority boost when focusing BnS Game Process
++ Removed: Removed the popups after updating Buddy for changes made to settings.ini
++ Fixed Bug: Starting BnS Buddy with game killer check on would prevent it from working
+
+Version 5.8.7.7
++ Fixed Bug: Refreshing addons would only remove 1-2 from the list instead of all modified items
+
+Version 5.8.7.6
++ Reworked: Applying addons now has option for bitness
++ Fixed Bug: Fix Server Selection for NA/EU resulting an unhandled exception
+
+Version 5.8.7.5
++ Fixed Bug: Check settings.ini if updated was broken due to invalid settings name
++ Fixed Bug: Collision with MXM(Add an extra check for mxm registry and in NCLauncher.ini)
++ Fixed Bug: Addons would still compile a multiple pattern patch
++ Fixed Bug: Not being connected to the internet would prevent buddy from attempting to sign in again(play button grayed out)
+
+Version 5.8.7.4
++ Added: Create addon function
++ Added: Login for Taiwan and Korean now supported
++ Added: Warning when restoring files in dat editor
++ Added: Remember me function for language path used if multiple
++ Removed: Backup feature for addons
++ Reworked: Restore button in launcher tab edits and restores the option to default
++ Reworked: Undo Selected Addon instead of restore files
++ Reworked: Recompile addons that mods were applied to(and reverting)
++ Reworked: Cleaning of the editing folder used by buddy replacing new files with old ones
++ Fixed Bug: When not choosing a language would ask for path instead and loop
++ Fixed Bug: Bad path formats would lead to user documents
++ Fixed Bug: Wrong arguments for other clients
++ Fixed Bug: Don't proceed unpacking if file does not exist(if tamepered)
++ Fixed Bug: Don't proceed patching an unexisting file within config files
++ Fixed Bug: Annoying popup that says what language you selected
++ Fixed Bug: French localisation server automatic selecter
++ Fixed Bug: Registry subkey did not exist thus causing errors when memorizing user credentials
+
+Version 5.8.7.3
++ Fixed Bug: Compiling the same xml multiple times
++ Fixed Bug: Remember last signed in user
++ Fixed Bug: Untick addons after done patching/compiling
++ Fixed Bug: Closing Login form returns to Buddy
++ Fixed Bug: Restore in launcher tab not finding path if backup did not exist
++ Fixed Bug: Login Form won't remember previous entered login if a second user was forgotten
+
+Version 5.8.7.2
++ Fixed Bug: Description Text for Addons overflowed out of app.
++ Fixed Bug: Users not remembered caused by old version of buddy
++ Fixed Bug: Files not clearing upon exit in login form
++ Fixed Bug: Addons tab not working(not decompiling or compiling)
++ Fixed Bug: Server setting not recognized when reading nclauncher.ini
++ Fixed Bug: Addons Triggered without wanting it to
+
+Version 5.8.7.1
++ Added: Auto Memory Cleaner at game start and Memory Cleaner Button
++ Added: Multiple Account Remember me
++ Fixed Bug: Packet Buffer empty due to lost connection crashes BnS Buddy
++ Fixed Bug: Restoring addons automatically on startup prevented users to open game
++ Fixed Bug: Backup and restore for addons weren't implemented properly
++ Fixed Bug: Applying any addons would hang app.
++ Fixed Bug: Fixed popup in Login form weren't proper style
++ Fixed Bug: Password encryption weren't enough suffisticated 
++ Fixed Bug: Ok button on help window for login wasn't positioned properly
+
+Version 5.8.7 (TESTING PHASE)
++ Server: Unblocked all countries that could not download BnS Buddy, online version check and updater 
++ Added: Custom paths for mods (General use) 
++ Added: Automatic restore of config/config64 if modded to skip error at client start 
++ Added: Game Process Killer after started 
++ Added: Addons (Patches the mods you want automatically after every launch) 
++ Added: Routines to determine wich Lang path you are actually using if multiple are found 
++ Added: Process Priority dropdown in settings page 3 
++ Added: Japan Support 
++ Added: Korean Support 
++ Fixed Bug: Kept asking wich client version you wanted to run if the paths were found by default at start
++ Fixed Bug: The first ping is now in background worker instead of main thread, preventing freeze at start
++ Fixed Bug: When game won't start and dies. A popup will ask to verify your ip.
++ Fixed Bug: Forms in tabs won't fit and goes out of bounds
++ Fixed Bug: Form won't change when tab is changed
++ Reworked: Changed ip to check your game ping correctly (na & eu)
++ Reworked: Login Form
+
+Version 5.8.6.1
++ Reworked: Login for Auth Token Generation
++ Fixed Bug: Randomn errors would appear in log and popup even after everything worked.
+
+Version 5.8.6
++ Added: Auth Token Generation
++ Fixed Bug: When path dosen't exist, delete the item (32-bit and 64-bit)
++ Fixed Bug: (unique) Endless naming bug loop in mod manager
++ Fixed Bug: Font Scaling issue gave wrong size of form
++ Fixed Bug: Treeviews would give null if item is removed
+
+Version 5.8.5
++ Fixed Bug: Setted Default Client wouldn't switch back to 32bit
+
+Version 5.8
++ Removed: Static paths to Language
++ Removed: Static paths to Client.exe
++ Added: Recursive check for Language
++ Added: Recursive check for Client.exe (32bit & 64Bit)
++ Added: Option to change from 32bit to 64bit in settings
++ Added: Saving of Client choice as default launcher
++ Reworked: Using of path to Client.exe
+++ You can now change the default client in settings page 2
+
+Version 5.7
++ Removed: Integrated Updater
++ Added: External Updater/Downloader
++ Reworked: Settings.ini handling not overwriting current settings after update
++ Reworked: Change Text in Settings for easier understanding of wich is wich of Client/Game paths
+++ You can now use the Updater/Downloader to download BnS Buddy
+
 Version 5.6
 + Removed: Static checks for Server/Lang
 + Removed: bnsdat tool (.exe) from project
