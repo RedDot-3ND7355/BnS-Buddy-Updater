@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -12,7 +11,7 @@ public class EmbeddedAssembly
 {
     // Version 1.3
 
-    static Dictionary<string, Assembly> dic = null;
+    private static Dictionary<string, Assembly> dic = null;
 
     /// <summary>
     /// Load Assembly, DLL from Embedded Resources into memory.
@@ -60,7 +59,7 @@ public class EmbeddedAssembly
         {
             // Get the hash value from embedded DLL/assembly
             string fileHash = BitConverter.ToString(sha1.ComputeHash(ba)).Replace("-", string.Empty);
-            
+
             // Define the temporary storage location of the DLL/assembly
             tempFile = Path.GetTempPath() + fileName;
 
@@ -95,7 +94,7 @@ public class EmbeddedAssembly
         {
             System.IO.File.WriteAllBytes(tempFile, ba);
         }
-        
+
         // Load it into memory
         asm = Assembly.LoadFile(tempFile);
 

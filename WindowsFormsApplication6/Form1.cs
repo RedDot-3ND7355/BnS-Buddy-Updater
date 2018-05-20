@@ -3,7 +3,6 @@ using SharpCompress.Common;
 using SharpCompress.Compressor;
 using SharpCompress.Compressor.Deflate;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -27,17 +26,29 @@ namespace WindowsFormsApplication6
     {
         // Path to app
         public string AppPath = Path.GetDirectoryName(Application.ExecutablePath);
+
         // Virtual browser
-        WebClient client = new WebClient();
+        private WebClient client = new WebClient();
+
+        // Background worker
+        private BackgroundWorker Worker = new BackgroundWorker();
+
         // Bool to tell app is ready
-        bool Ready = false;
+        private bool Ready = false;
+
         // Cert Stuff
-        string BnSBuddySerial = "";
-        string BnSServerCert = "";
+        private string BnSBuddySerial = "";
+
+        private string BnSServerCert = "";
+
         public Form1()
         {
+            /* Set Private Path */
+            Prompt.AppPath = AppPath;
             /* Initialize Updater */
             InitializeComponent();
+            /* Get Color */
+            SetFormColor();
             /* Admin Check */
             CheckIsAdministrator();
             /* Validate Legetimacy of the Updater */
@@ -50,8 +61,79 @@ namespace WindowsFormsApplication6
             GrabSettings();
             /* Compare then Validate Versions */
             Compare_n_Validate();
-            /* Set updater as readu */
+            /* Set updater as ready */
             Ready = true;
+        }
+
+        private void SetFormColor()
+        {
+            if (File.Exists(@AppPath + "\\Settings.ini"))
+            {
+                string line = File.ReadLines(@AppPath + "\\Settings.ini").Skip(43).Take(1).First().Replace("buddycolor = ", "");
+                // Set style
+                if (line == "Black")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Black;
+                }
+                else if (line == "Red")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Red;
+                }
+                else if (line == "Purple")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Purple;
+                }
+                else if (line == "Pink")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Pink;
+                }
+                else if (line == "Orange")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Orange;
+                }
+                else if (line == "Magenta")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Magenta;
+                }
+                else if (line == "Lime")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Lime;
+                }
+                else if (line == "Green")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Green;
+                }
+                else if (line == "Default")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Default;
+                }
+                else if (line == "Brown")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Brown;
+                }
+                else if (line == "Blue")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Blue;
+                }
+                else if (line == "Silver")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Silver;
+                }
+                else if (line == "Teal")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
+                }
+                else if (line == "White")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.White;
+                }
+                else if (line == "Yellow")
+                {
+                    metroStyleManager1.Style = MetroFramework.MetroColorStyle.Yellow;
+                }
+                // Set global
+                Prompt.ColorSet = metroStyleManager1.Style;
+            }
         }
 
         public static bool IsAdministrator()
@@ -66,7 +148,7 @@ namespace WindowsFormsApplication6
             // Check admin shortcut
             if (IsAdministrator() == false)
             {
-                MessageBox.Show("Please run as Admin", "Error: Not admin", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                Prompt.Popup("Please run as Admin");
                 KillApp();
             }
         }
@@ -86,7 +168,7 @@ namespace WindowsFormsApplication6
                     });
                     using (var sslStream = new SslStream(Client.GetStream(), true, DomainCert))
                     {
-                        sslStream.AuthenticateAsClient("updates.xxzer0modzxx.net");
+                        sslStream.AuthenticateAsClient("updates.xxzer0modzxx.net", null, System.Security.Authentication.SslProtocols.Tls12, false);
                         var serverCertificate = sslStream.RemoteCertificate;
                         cert = new X509Certificate2(serverCertificate);
                     }
@@ -148,7 +230,7 @@ namespace WindowsFormsApplication6
         {
             if (metroLabel3.Text == "Offline")
             {
-                metroButton3.Text = "Make sure you are online to use the updater.";
+                metroButton3.Text = "Make sure that:" + Environment.NewLine + "1: Not any anti-virus blocks the connection." + Environment.NewLine + "2: You are online to use the updater." + Environment.NewLine + "3: Check if update server status is online";
             }
             else if (metroLabel4.Text == "Not found")
             {
@@ -208,6 +290,8 @@ namespace WindowsFormsApplication6
                 {
                     string server = "updates.xxzer0modzxx.net";
                     TcpClient clientVAR = new TcpClient(server, 443);
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     var DomainCert = new RemoteCertificateValidationCallback(delegate (object snd, X509Certificate certificate, X509Chain chainLocal, SslPolicyErrors sslPolicyErrors)
                     {
                         return true; //Accept every certificate, even if it's invalid
@@ -215,7 +299,7 @@ namespace WindowsFormsApplication6
                     using (SslStream sslStream = new SslStream(clientVAR.GetStream(), false, DomainCert))
                     {
                         string result = "";
-                        sslStream.AuthenticateAsClient(server);
+                        sslStream.AuthenticateAsClient(server, null, System.Security.Authentication.SslProtocols.Tls12, false);
                         clientVAR.SendTimeout = 500;
                         clientVAR.ReceiveTimeout = 1000;
                         // Send request headers
@@ -256,9 +340,9 @@ namespace WindowsFormsApplication6
                     }
                     clientVAR.Close();
                 }
-                catch
+                catch (Exception e)
                 {
-                    metroLabel3.Text = "Offline";
+                    metroLabel3.Text = string.Format("Offline: {0}", e.ToString());
                 }
             }
         }
@@ -267,39 +351,36 @@ namespace WindowsFormsApplication6
         {
             try
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(AppPath + "\\BnS Buddy.exe");
-                metroLabel4.Text = versionInfo.ProductVersion;
+                if (File.Exists(AppPath + "\\BnS Buddy.exe"))
+                {
+                    var versionInfo = FileVersionInfo.GetVersionInfo(AppPath + "\\BnS Buddy.exe");
+                    metroLabel4.Text = versionInfo.ProductVersion;
+                }
+                else { metroLabel4.Text = "Not found"; }
             }
             catch
             {
                 metroLabel4.Text = "Not found";
             }
         }
-        
-        BackgroundWorker bw = new BackgroundWorker();
-        async Task DownloadUpdate(string rootpath)
+
+        private BackgroundWorker bw = new BackgroundWorker();
+
+        private void DownloadUpdate(string rootpath)
         {
             try
             {
-                var handler = new HttpClientHandler()
+                // Save Edited File
+                Worker = new BackgroundWorker();
+                Worker.WorkerSupportsCancellation = true;
+                Worker.WorkerReportsProgress = true;
+                Worker.ProgressChanged += new ProgressChangedEventHandler(Worker_ProgressChanged);
+                Worker.DoWork += new DoWorkEventHandler(Worker_SaveAsync);
+                if (!Worker.IsBusy)
                 {
-                    AllowAutoRedirect = false
-                };
-                HttpClient client = new HttpClient(handler);
-                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "BnSBuddy/" + Application.ProductVersion + " (compatible;)");
-                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-                HttpResponseMessage response = await client.GetAsync("https://updates.xxzer0modzxx.net/BnS%20Buddy%20[By%20Kogaru].rar");
-                response.EnsureSuccessStatusCode();
-                using (FileStream fileStream = new FileStream(rootpath + "\\BnS Buddy [By Kogaru].rar", FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
-                {
-                    await response.Content.CopyToAsync(fileStream);
-                    while (response.Content.Headers.ContentLength > fileStream.Position)
-                    {
-                        metroProgressBar1.Maximum = 200;
-                        metroProgressBar1.Value = (Convert.ToInt32(fileStream.Position) / Convert.ToInt32(response.Content.Headers.ContentLength)) * 100;
-                    }
-
+                    Worker.RunWorkerAsync(rootpath);
                 }
+                else { Prompt.Popup("Please wait until saving is finished."); }
             }
             catch
             {
@@ -307,34 +388,148 @@ namespace WindowsFormsApplication6
             }
         }
 
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            bw.ReportProgress(e.ProgressPercentage);
+        }
+
+        public class HttpClientDownloadWithProgress : IDisposable
+        {
+            private readonly string _downloadUrl;
+            private readonly string _destinationFilePath;
+
+            private HttpClient _httpClient;
+
+            public delegate void ProgressChangedHandler(long? totalFileSize, long totalBytesDownloaded, double? progressPercentage);
+
+            public event ProgressChangedHandler ProgressChanged;
+
+            public HttpClientDownloadWithProgress(string downloadUrl, string destinationFilePath)
+            {
+                _downloadUrl = downloadUrl;
+                _destinationFilePath = destinationFilePath;
+            }
+
+            public async Task StartDownload()
+            {
+                var handler = new HttpClientHandler()
+                {
+                    AllowAutoRedirect = false
+                };
+                _httpClient = new HttpClient(handler) { Timeout = TimeSpan.FromDays(1) };
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "BnSBuddy/" + Application.ProductVersion + " (compatible;)");
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                using (var response = await _httpClient.GetAsync(_downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                    await DownloadFileFromHttpResponseMessage(response);
+            }
+
+            private async Task DownloadFileFromHttpResponseMessage(HttpResponseMessage response)
+            {
+                response.EnsureSuccessStatusCode();
+
+                var totalBytes = response.Content.Headers.ContentLength;
+
+                using (var contentStream = await response.Content.ReadAsStreamAsync())
+                    await ProcessContentStream(totalBytes, contentStream);
+            }
+
+            private async Task ProcessContentStream(long? totalDownloadSize, Stream contentStream)
+            {
+                var totalBytesRead = 0L;
+                var readCount = 0L;
+                var buffer = new byte[128];
+                var isMoreToRead = true;
+
+                using (var fileStream = new FileStream(_destinationFilePath, FileMode.Create, FileAccess.Write, FileShare.None, 128, true))
+                {
+                    do
+                    {
+                        var bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length);
+                        if (bytesRead == 0)
+                        {
+                            isMoreToRead = false;
+                            TriggerProgressChanged(totalDownloadSize, totalBytesRead);
+                            continue;
+                        }
+
+                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+
+                        totalBytesRead += bytesRead;
+                        readCount += 1;
+
+                        if (readCount % 100 == 0)
+                            TriggerProgressChanged(totalDownloadSize, totalBytesRead);
+                    }
+                    while (isMoreToRead);
+                }
+            }
+
+            private void TriggerProgressChanged(long? totalDownloadSize, long totalBytesRead)
+            {
+                if (ProgressChanged == null)
+                    return;
+
+                double? progressPercentage = null;
+                if (totalDownloadSize.HasValue)
+                    progressPercentage = Math.Round((double)totalBytesRead / totalDownloadSize.Value * 100, 2);
+
+                ProgressChanged(totalDownloadSize, totalBytesRead, progressPercentage);
+            }
+
+            public void Dispose()
+            {
+                _httpClient?.Dispose();
+            }
+        }
+
+        private async void Worker_SaveAsync(object senderer, DoWorkEventArgs e)
+        {
+            string rootpath = e.Argument.ToString();
+            using (var client = new HttpClientDownloadWithProgress("https://updates.xxzer0modzxx.net/BnS%20Buddy%20[By%20Kogaru].rar", rootpath + "\\BnS Buddy [By Kogaru].rar"))
+            {
+                client.ProgressChanged += (totalFileSize, totalBytesDownloaded, progressPercentage) =>
+                {
+                    metroProgressBar1.HideProgressText = false;
+                    metroProgressBar1.Value = Convert.ToInt32(progressPercentage);
+                    metroProgressBar1.ProgressBarStyle = ProgressBarStyle.Continuous;
+                    metroProgressBar1.Refresh();
+                };
+                await client.StartDownload();
+                _workerCompleted.Set();
+            }
+        }
 
         private AutoResetEvent _workerCompleted = new AutoResetEvent(false);
+
         private void metroButton3_ClickAsync(object sender, EventArgs e)
         {
             metroButton3.Enabled = false;
+            metroProgressBar1.ProgressBarStyle = ProgressBarStyle.Marquee;
+            metroProgressBar1.Refresh();
             try
             {
+                bw.WorkerReportsProgress = true;
                 bw.DoWork += new DoWorkEventHandler(Bw_DoWork);
                 bw.RunWorkerAsync();
             }
-            catch (Exception a)
+            catch
             {
-                Prompt.Popup("Error: Could not download update!" + Environment.NewLine + a.ToString());
+                Prompt.Popup("Error: Could not download update! Try again :C ");
             }
         }
 
-        private async void Bw_DoWork(object sender, DoWorkEventArgs e)
+        private void Bw_DoWork(object sender, DoWorkEventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-            await DownloadUpdate(AppPath);
+            DownloadUpdate(AppPath);
+            _workerCompleted.WaitOne();
             client_DownloadFileCompleted();
         }
 
-        void client_DownloadFileCompleted()
+        private void client_DownloadFileCompleted()
         {
             IArchive rar = SharpCompress.Archive.Rar.RarArchive.Open(AppPath + "\\BnS Buddy [By Kogaru].rar", Options.None);
             double totalSize = rar.Entries.Where(a => !a.IsDirectory).Sum(a => a.Size);
-            metroProgressBar1.Value = 100;
             long completed = 0;
             Directory.CreateDirectory(AppPath + "\\Update");
             foreach (var entry in rar.Entries.Where(a => !a.IsDirectory))
@@ -342,8 +537,6 @@ namespace WindowsFormsApplication6
                 entry.WriteToDirectory(AppPath + "\\Update", ExtractOptions.Overwrite);
                 completed += entry.Size;
                 var percentage = completed / totalSize * 100;
-                metroProgressBar1.Value = 100 + Convert.ToInt32(percentage);
-                metroProgressBar1.Refresh();
             }
             rar.Dispose();
             FinishUpdate();
@@ -364,14 +557,14 @@ namespace WindowsFormsApplication6
                 foreach (FileInfo file in files)
                 {
                     if (file.Name != "MetroFramework.dll")
-                    File.Copy(file.FullName, AppPath + "\\" + file.Name, true);
+                        File.Copy(file.FullName, AppPath + "\\" + file.Name, true);
                     File.Delete(file.FullName);
                 }
                 folder.Delete();
                 File.Delete(AppPath + "\\BnS Buddy [By Kogaru].rar");
                 StartBnSBuddy();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Prompt.Popup("Error: Couldn't copy update files or clear Update folder." + Environment.NewLine + e.ToString());
             }
@@ -397,16 +590,37 @@ namespace WindowsFormsApplication6
             }
             else
             {
-                Process BnSBuddy = new Process();
-                BnSBuddy.StartInfo.FileName = AppPath + "\\BnS Buddy.exe";
-                BnSBuddy.Start();
+                ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + "timeout 2 && \"" + AppPath + "\\BnS Buddy.exe\"")
+                {
+                    RedirectStandardError = false,
+                    RedirectStandardOutput = false,
+                    UseShellExecute = true,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+
+                using (Process proc = new Process())
+                {
+                    proc.StartInfo = procStartInfo;
+                    proc.Start();
+                }
+                //Process BnSBuddy = new Process();
+                //BnSBuddy.StartInfo.FileName = AppPath + "\\BnS Buddy.exe";
+                //BnSBuddy.Start();
             }
         }
 
         public static class Prompt
         {
+            public static string AppPath { get; internal set; }
+
+            public static MetroFramework.MetroColorStyle ColorSet { get; internal set; }
+
             public static void Popup(string Message)
             {
+                // Get Color
+                string line = File.ReadLines(@AppPath + "\\Settings.ini").Skip(43).Take(1).First().Replace("buddycolor = ", "");
+                // Continue
                 ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
                 MetroFramework.Forms.MetroForm prompt = new MetroFramework.Forms.MetroForm()
                 {
@@ -429,6 +643,9 @@ namespace WindowsFormsApplication6
                 prompt.Controls.Add(confirmation);
                 prompt.Controls.Add(textLabel);
                 prompt.AcceptButton = confirmation;
+                // Set style
+                prompt.Style = ColorSet;
+                // Prompt
                 prompt.ShowDialog();
             }
         }

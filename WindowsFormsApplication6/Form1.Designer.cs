@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -39,14 +40,16 @@
             this.metroButton3 = new MetroFramework.Controls.MetroButton();
             this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroProgressBar1
             // 
-            this.metroProgressBar1.HideProgressText = false;
+            this.metroProgressBar1.FontWeight = MetroFramework.MetroProgressBarWeight.Regular;
             this.metroProgressBar1.Location = new System.Drawing.Point(23, 215);
             this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Blocks;
+            this.metroProgressBar1.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.metroProgressBar1.Size = new System.Drawing.Size(446, 23);
             this.metroProgressBar1.TabIndex = 0;
             this.metroProgressBar1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -98,6 +101,7 @@
             // 
             // metroButton1
             // 
+            this.metroButton1.Highlight = true;
             this.metroButton1.Location = new System.Drawing.Point(438, 20);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(32, 32);
@@ -108,6 +112,7 @@
             // 
             // metroButton2
             // 
+            this.metroButton2.Highlight = true;
             this.metroButton2.Location = new System.Drawing.Point(400, 20);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(32, 32);
@@ -136,6 +141,7 @@
             this.metroToggle1.TabIndex = 8;
             this.metroToggle1.Text = "Off";
             this.metroToggle1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroToggle1.UseStyleColors = true;
             this.metroToggle1.UseVisualStyleBackColor = true;
             this.metroToggle1.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
             // 
@@ -149,10 +155,15 @@
             this.metroLabel5.Text = "Auto Update";
             this.metroLabel5.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = this;
+            this.metroStyleManager1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(492, 261);
             this.ControlBox = false;
             this.Controls.Add(this.metroLabel5);
@@ -172,6 +183,7 @@
             this.Resizable = false;
             this.Text = "BnS Buddy Updater";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +201,7 @@
         private MetroFramework.Controls.MetroButton metroButton3;
         private MetroFramework.Controls.MetroToggle metroToggle1;
         private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }
 
