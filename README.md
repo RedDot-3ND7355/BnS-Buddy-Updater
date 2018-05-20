@@ -13,6 +13,13 @@ Updater for BnS Buddy
 
 **Changelog:**
 
+Updater 2.5.1.4
++ Added: A Small check for TLS 1.2 while fetching version and grab update
++ Reworked: The icons
++ Reworked: Reposition of the admin check
++ Fixed Bug: New error msg wasn't displayed properly
++ Fixed Bug: Added a small delay between finalising update and opening buddy
+
 Updater 2.5.1.3
 + Added: New message when errors occur on updater startup
 + Added: Styling to the minimize and close button
